@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        $contacts = Contact::paginate(7);;
+        $contacts = Contact::paginate(7);
         $categories = Category::all();
         $tags = Tag::all();
 
@@ -22,4 +22,14 @@ class AdminController extends Controller
             'tags' => $tags,
         ]);
     }
+    public function show(Contact $contact)
+{
+    return view('admin.show', compact('contact'));
+}
+public function destroy(Contact $contact)
+{
+    $contact->delete();
+
+    return redirect('/admin');
+}
 }
